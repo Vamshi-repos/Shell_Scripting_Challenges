@@ -4,11 +4,13 @@ SG_ID="sg-06b04b086fc258608"
 AMI_ID="ami-0b6d9d3d33ba97d99"
 HOST_ZONE="Z10054011HGB7FPO73B9M"
 DOMAIN_NAME="daws88s.online"
+KEYPAIR="sshkeypair"
 
 for instance in $@
 do
     INSTANCE_ID=$( aws ec2 run-instances \
     --image-id $AMI_ID \
+    --key-name $KEYPAIR
     --instance-type "t3.micro" \
     --security-group-ids $SG_ID \
     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" \
